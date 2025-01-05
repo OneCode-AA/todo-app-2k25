@@ -20,7 +20,7 @@ function Todo({ setTask }) {
 
   return (
     <form 
-    className="form w-[97%] m-w-[455px] flex items-center gap-[12px] mt-[38px] self-center max-sm:flex-col" 
+    className="form w-[97%] m-w-[455px] max-w-[1024px] flex items-center gap-[12px] mt-[38px] self-center max-sm:flex-col" 
     onSubmit={handleSubmit}
     >
       <label className='w-[90%]'>
