@@ -16,6 +16,13 @@ function Home() {
     );
   };
 
+  const editTask = (id, newTitle) => {
+    setTasks((prev) =>
+      prev.map((task) => (task.id === id ? { ...task, title: newTitle } : task))
+    );
+  };
+
+
   const deleteTask = (id) => {
     setTasks((prev) => prev.filter((task) => task.id !== id));
   };
@@ -31,6 +38,7 @@ function Home() {
       <ToDoList
         tasks={tasks}
         onToggleComplete={toggleTaskCompletion}
+        onEdit={editTask}
         onDelete={deleteTask}
       />
     </div>

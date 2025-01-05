@@ -1,7 +1,7 @@
 import React from 'react';
 import Items from './Items';
 
-function ToDoList({ tasks, onToggleComplete, onDelete }) {
+function ToDoList({ tasks, onToggleComplete, onEdit, onDelete }) {
   return (
     <ol className="todo_list self-center w-full max-w-[455px] flex flex-col items-center my-[27px] gap-[27px]">
       {tasks && tasks.length > 0 ? (
@@ -10,6 +10,7 @@ function ToDoList({ tasks, onToggleComplete, onDelete }) {
             key={item.id}
             item={item}
             onToggleComplete={onToggleComplete}
+            onEdit={onEdit}
             onDelete={onDelete}
           />
         ))

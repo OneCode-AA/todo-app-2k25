@@ -23,6 +23,13 @@ button {
   cursor: pointer;
 }
 
+.editBtn:hover {
+  color: aquamarine;
+}
+
+.deleteBtn:hover {
+  color: tomato;
+}
 
 .deleteBtn:hover,
 .editBtn:hover {

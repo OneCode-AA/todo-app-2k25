@@ -1,7 +1,16 @@
 import { DeleteOutline, Edit, RadioButtonUnchecked, CheckCircle } from '@mui/icons-material';
-import React from 'react';
+import React, { useState } from 'react';
 
-function Items({ item, onToggleComplete, onDelete }) {
+function Items({ item, onToggleComplete, onEdit, onDelete }) {
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [newTitle, setNewTitle] = useState(item.title);
+
+  const handleSave = () => {
+    onEdit(item.id, newTitle);
+    setIsEditing(false);
+  };
+
   return (
     <li
       id={item.id}
@@ -13,14 +22,28 @@ function Items({ item, onToggleComplete, onDelete }) {
         className="task_items_left flex items-center gap-2"
         onClick={() => onToggleComplete(item.id)}
       >
-        {item.is_completed ? <CheckCircle /> : <RadioButtonUnchecked />}
-        <p>{item.title}</p>
+      {item.is_completed ? <CheckCircle /> : <RadioButtonUnchecked />}
+        {isEditing ? (
+          <input
+            type="text"
+            value={newTitle}
+            onChange={(e) => setNewTitle(e.target.value)}
+            className="bg-transparent border-b border-gray-500 focus:outline-none text-white"
+          />
+        ) : (
+          <p>{item.title}</p>
+        )}
       </button>
       <section className="task_items_right flex gap-2">
-        <button>
-          <span><Edit className="editBtn"/></span>
-          
-        </button>
+        {isEditing ? (
+          <button onClick={handleSave}>
+            <span>Save</span>
+          </button>
+        ) : (
+          <button onClick={() => setIsEditing(true)}>
+            <span><Edit className="editBtn" /></span>
+          </button>
+        )}
         <button onClick={() => onDelete(item.id)}>
           <span><DeleteOutline className="deleteBtn" /></span>
           
