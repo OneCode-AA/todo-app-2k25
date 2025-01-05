@@ -1,36 +1,40 @@
 "use client";
-import Header from '@/components/Header'
-import Todo from '@/components/Todo'
-import TodoHero from '@/components/TodoHero'
-import ToDoList from '@/components/ToDoList'
 import React from 'react';
-
+import Header from '@/components/Header';
+import Todo from '@/components/Todo';
+import TodoHero from '@/components/TodoHero';
+import ToDoList from '@/components/ToDoList';
 
 function Home() {
-  const [task, setTask] = React.useState([
-    { 
-      id: 1,
-      title: "Some task",
-      is_completed: false },
-    // add other dummy data
-  ]);
-  const tasks_completed = task.filter(
-    (task) => task.is_completed === true
-  ).length;
-  const total_tasks = task.length;
+  const [tasks, setTasks] = React.useState([]);
+
+  const toggleTaskCompletion = (id) => {
+    setTasks((prev) =>
+      prev.map((task) =>
+        task.id === id ? { ...task, is_completed: !task.is_completed } : task
+      )
+    );
+  };
+
+  const deleteTask = (id) => {
+    setTasks((prev) => prev.filter((task) => task.id !== id));
+  };
+
+  const tasksCompleted = tasks.filter((task) => task.is_completed).length;
+  const totalTasks = tasks.length;
 
   return (
-    <div className='wrapper flex flex-col sm:w-full w-[70%] m-auto justify-center items-center gap-1'>
-         <Header/>
-        <TodoHero tasks_completed={tasks_completed} total_tasks={total_tasks} />
-   
-      <Todo setTask={setTask}/>
-      <ToDoList tasks={task}/>
-
-       
-       
+    <div className="wrapper flex flex-col sm:w-full w-[70%] m-auto justify-center items-center gap-4">
+      <Header />
+      <TodoHero tasks_completed={tasksCompleted} total_tasks={totalTasks} />
+      <Todo setTask={setTasks} />
+      <ToDoList
+        tasks={tasks}
+        onToggleComplete={toggleTaskCompletion}
+        onDelete={deleteTask}
+      />
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;

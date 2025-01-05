@@ -9,18 +9,18 @@ function Todo({ setTask }) {
         ...prev,
         { id: Date.now(), title: newTask, is_completed: false },
       ]);
-      setNewTask(''); // Clear the input field after adding the task
+      setNewTask(''); 
     }
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent the form from refreshing the page
-    addTask(); // Call the function to add the task
+    e.preventDefault(); 
+    addTask(); 
   };
 
   return (
     <form 
-    className="form w-[97%] m-w-[455px] flex items-center gap-[12px] mt-[38px] self-center" 
+    className="form w-[97%] m-w-[455px] flex items-center gap-[12px] mt-[38px] self-center max-sm:flex-col" 
     onSubmit={handleSubmit}
     >
       <label className='w-[90%]'>
@@ -34,7 +34,7 @@ function Todo({ setTask }) {
           placeholder="Write your next task"
         />
       </label>
-      <button type="submit" className='w-[10%] h-[50px] bg-[#88ab33] border-none rounded'>
+      <button type="submit" className='w-[10%] max-sm:w-[30%] h-[50px] bg-teal-700 border-none rounded hover:transition-all hover:ease-in-out hover:duration-500 duration-500 hover:scale-[1.0921]'>
         <span className="">Submit</span>
       </button>
     </form>
